@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint", 
+    "lint": "next lint",
     "postinstall": "prisma generate"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/react": "^19.1.12",
     "@types/ws": "^8.18.1",
     "prisma": "^6.16.0",
     "tailwindcss": "^4"
