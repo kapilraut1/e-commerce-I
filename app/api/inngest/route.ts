@@ -6,7 +6,7 @@ export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
     syncUserCreation,
-    syncUserDeletion,
+    syncUserUpdation,
     syncUserDeletion
     , // <-- This is where you'll always add all your functions
   ],
