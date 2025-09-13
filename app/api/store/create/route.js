@@ -1,13 +1,37 @@
-import { getAuth } from "@clerk/nextjs/server";
+import { getAuth} from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/clerk-sdk-node"; 
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import imagekit from "@/configs/imageKit"
 // create  a store
 
 export async function POST(request) {
   try {
+    console.log("clerkClient keys:", Object.keys(clerkClient || {}));
+
     const { userId } = getAuth(request);
+    console.log("Auth check:", getAuth(request));
 
     //get data from form
+  if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Ensure user exists in your DB
+    let user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      const clerkUser = await clerkClient.users.getUser(userId);
+      user = await prisma.user.create({
+        data: {
+          id: userId,
+          name: clerkUser.firstName || "Unknown",
+          email: clerkUser.emailAddresses[0]?.emailAddress,
+          image: clerkUser.imageUrl,
+        },
+      });
+    }
+
+  
 
     const formData = await request.formData();
 
@@ -51,6 +75,8 @@ export async function POST(request) {
       );
     }
 
+   
+
     //image upload
     const buffer = Buffer.from(await image.arrayBuffer());
     const response = await imagekit.upload({
@@ -73,9 +99,9 @@ export async function POST(request) {
         },
       ],
     });
-
     const newStore = await prisma.store.create({
-      data: userId,
+      data: { 
+      userId,
       name,
       description,
       username: username.toLowerCase(),
@@ -83,7 +109,7 @@ export async function POST(request) {
       contact,
       address,
       logo: optimizedImage,
-    });
+    }});
 
     // link to user
 

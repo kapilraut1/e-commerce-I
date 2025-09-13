@@ -13,7 +13,6 @@ export async function GET(request){
 
 // get all orders
 
-
 const orders = await prisma.order.findMany({
     where: {storeId}
 })
