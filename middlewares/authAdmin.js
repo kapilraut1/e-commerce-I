@@ -1,4 +1,4 @@
-import {clerkClient} from ("@clerk/nextjs/server")
+import {clerkClient} from "@clerk/nextjs/server"
 
 export const authAdmin =async(userId) =>{
     try{
