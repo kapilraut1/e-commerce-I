@@ -46,7 +46,7 @@ console.error(error);
 
 // get all pending and rejected storek;
 
-export async function GET(req){
+export async function GET(request){
     try{
         const {userId} = getAuth(request)
 
