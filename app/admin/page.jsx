@@ -6,6 +6,7 @@ import { useAuth } from "@clerk/nextjs"
 import { CircleDollarSignIcon, ShoppingBasketIcon, StoreIcon, TagsIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import axios from "axios"
 
 export default function AdminDashboard() {
   const {getToken} =useAuth();

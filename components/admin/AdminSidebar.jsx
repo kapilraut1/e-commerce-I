@@ -9,6 +9,7 @@ import { useUser } from "@clerk/nextjs"
 
 const AdminSidebar = () => {
  const {user }= useUser();
+ console.log(user)
     const pathname = usePathname()
 
     const sidebarLinks = [

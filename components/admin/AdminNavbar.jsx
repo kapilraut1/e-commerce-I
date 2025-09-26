@@ -6,7 +6,6 @@ const AdminNavbar = () => {
 
 const {user} =useUser()
 
-
     return (
         <div className="flex items-center justify-between px-12 py-3 border-b border-slate-200 transition-all">
             <Link href="/" className="relative text-4xl font-semibold text-slate-700">

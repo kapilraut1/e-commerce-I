@@ -2,11 +2,10 @@ import prisma from "@/lib/prisma";
 import authAdmin from "@/middlewares/authAdmin"
 import {getAuth} from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { authAdmin } from "../../../../middlewares/authAdmin";
 
 // Toggle stoe =active....
 
-export async function POST(req){
+export async function POST(request){
     try{
         const {userId} = getAuth(request)
 
